@@ -1,12 +1,9 @@
 FROM python:3.8-slim-buster
 
-ENV APP_HOME /app
-WORKDIR $APP_HOME
+COPY . /app
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
 
-RUN pip3 install -r requirements.txt
-
-COPY . .
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["app.py"]
